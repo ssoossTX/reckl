@@ -1,0 +1,44 @@
+# Backup files
+*.backup
+*.bak
+*.tmp
+
+# Old versions
+script.js.backup
+style.css.backup
+
+# Node modules
+node_modules/
+npm-debug.log
+yarn-error.log
+package-lock.json
+
+# OS files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# IDE files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Dependencies
+vendor/
+Gemfile.lock
+
+# Build
+_site/
+.jekyll-cache/
+.jekyll-metadata
+
+# Environment
+.env
+.env.local
+
+# Logs
+*.log
+logs/
