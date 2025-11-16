@@ -1,26 +1,7 @@
 # GitHub Pages Configuration for reckl game
-
-# Enable GitHub Pages
-publish_dir: .
-
-# Build settings
 markdown: kramdown
 theme: jekyll-theme-slate
 
-# Keep CNAME file
-include:
-  - index.html
-  - src/
-  - css/
-  - README.md
-  - ARCHITECTURE.md
-  - CHECKLIST.md
-  - MIGRATION.md
-  - RECOMMENDATIONS.md
-  - REFACTORING.md
-  - SUMMARY.md
-
-# Exclude files
 exclude:
   - script.js.backup
   - style.css.backup
@@ -28,3 +9,4 @@ exclude:
   - .git/
   - node_modules/
   - Gemfile*
+  - .gitignore
