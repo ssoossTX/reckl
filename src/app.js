@@ -7,7 +7,12 @@ import { Player } from './modules/Player.js';
 import { DungeonSystem } from './modules/DungeonSystem.js';
 import { StorageManager } from './modules/StorageManager.js';
 import { UIManager } from './modules/UIManager.js';
+import QuestSystem from './modules/QuestSystem.js';
+import StatisticsManager from './modules/StatisticsManager.js';
+import SkillTree from './modules/SkillTree.js';
+import GameModes from './modules/GameModes.js';
 import NotificationSystem from './utils/NotificationSystem.js';
+import particleSystem from './utils/ParticleSystem.js';
 import GameConfig from './constants/gameConfig.js';
 import ItemUtils from './utils/itemUtils.js';
 
@@ -17,6 +22,10 @@ class GameApp {
     this.dungeon = null;
     this.ui = null;
     this.notifications = null;
+    this.questSystem = null;
+    this.statistics = null;
+    this.skillTree = null;
+    this.gameModes = null;
     this.gameLoopInterval = null;
   }
 
@@ -30,7 +39,11 @@ class GameApp {
 
     // === Инициализировать системы ===
     this.notifications = new NotificationSystem();
-    this.ui = new UIManager(this.player, this.dungeon, this.notifications);
+    this.questSystem = new QuestSystem(this.player, StorageManager);
+    this.statistics = new StatisticsManager(this.player, StorageManager);
+    this.skillTree = new SkillTree(this.player);
+    this.gameModes = new GameModes(this.dungeon, this.player, this.statistics);
+    this.ui = new UIManager(this.player, this.dungeon, this.notifications, this.questSystem, this.statistics, this.skillTree, this.gameModes, particleSystem);
 
     // === Установить обработчики ===
     this.ui.initEventListeners();

@@ -361,3 +361,325 @@
     font-size: 1em;
   }
 }
+
+/* ===================================================
+   АНИМАЦИИ ДЛЯ СИСТЕМЫ ЧАСТИЦ
+   =================================================== */
+
+@keyframes float-up {
+  0% {
+    opacity: 1;
+    transform: translate(-50%, -50%) translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) translateY(-80px);
+  }
+}
+
+@keyframes wave-expand {
+  0% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(0.5);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(3);
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(0, 255, 255, 1);
+  }
+}
+
+.floating-text {
+  pointer-events: none;
+  z-index: 101;
+}
+
+/* ===================================================
+   СТИЛИ ДЛЯ НОВЫХ СИСТЕМ
+   =================================================== */
+
+/* Вкладка квестов */
+.quests-container {
+  padding: 16px;
+}
+
+.daily-quests {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.quest-card {
+  background: linear-gradient(135deg, #2a3a4a 0%, #1a2a3a 100%);
+  border-left: 4px solid #0ff;
+  padding: 12px 16px;
+  border-radius: 8px;
+  position: relative;
+  overflow: hidden;
+}
+
+.quest-card.completed {
+  border-left-color: #0f0;
+  opacity: 0.7;
+}
+
+.quest-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.quest-title {
+  font-weight: bold;
+  color: #0ff;
+  font-size: 1.1em;
+}
+
+.quest-reward {
+  color: #ffd700;
+  font-weight: bold;
+}
+
+.quest-description {
+  font-size: 0.9em;
+  color: #aaa;
+  margin-bottom: 8px;
+}
+
+.quest-progress {
+  background: #1a1f2e;
+  height: 6px;
+  border-radius: 3px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.quest-progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, #0ff, #00ff00);
+  transition: width 0.3s ease;
+}
+
+/* Вкладка статистики */
+.statistics-container {
+  padding: 16px;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.stat-box {
+  background: linear-gradient(135deg, #2a3a4a 0%, #1a2a3a 100%);
+  padding: 16px;
+  border-radius: 8px;
+  border: 1px solid #0ff;
+  text-align: center;
+}
+
+.stat-label {
+  color: #aaa;
+  font-size: 0.85em;
+  margin-bottom: 8px;
+}
+
+.stat-value {
+  font-weight: bold;
+  font-size: 1.4em;
+  color: #0ff;
+}
+
+.prestige-history {
+  margin-top: 24px;
+}
+
+.history-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 12px;
+}
+
+.history-table th,
+.history-table td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #2a3a4a;
+  font-size: 0.9em;
+}
+
+.history-table th {
+  background: #1a1f2e;
+  color: #0ff;
+  font-weight: bold;
+}
+
+.history-table tr:hover {
+  background: rgba(0, 255, 255, 0.1);
+}
+
+/* Вкладка умений */
+.skills-container {
+  padding: 16px;
+}
+
+.skill-trees {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.skill-tree {
+  background: linear-gradient(135deg, #2a3a4a 0%, #1a2a3a 100%);
+  border: 2px solid #0ff;
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.tree-title {
+  font-weight: bold;
+  font-size: 1.2em;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.tree-icon {
+  font-size: 1.5em;
+}
+
+.skill-nodes {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 12px;
+}
+
+.skill-node {
+  background: #1a1f2e;
+  border: 2px solid #555;
+  border-radius: 8px;
+  padding: 12px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.skill-node:hover:not(.locked) {
+  border-color: #0ff;
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+}
+
+.skill-node.unlocked {
+  background: #0a2a3a;
+  border-color: #0ff;
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.2);
+}
+
+.skill-node.locked {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.skill-name {
+  font-weight: bold;
+  font-size: 0.9em;
+  margin-bottom: 4px;
+}
+
+.skill-bonus {
+  font-size: 0.85em;
+  color: #0f0;
+}
+
+.skill-requirement {
+  font-size: 0.75em;
+  color: #f39c12;
+  margin-top: 4px;
+}
+
+/* Вкладка режимов игры */
+.game-modes-container {
+  padding: 16px;
+}
+
+.modes-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.mode-card {
+  background: linear-gradient(135deg, #2a3a4a 0%, #1a2a3a 100%);
+  border-left: 4px solid #0ff;
+  padding: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.mode-card:hover {
+  transform: translateX(8px);
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+}
+
+.mode-name {
+  font-weight: bold;
+  font-size: 1.1em;
+  color: #0ff;
+  margin-bottom: 8px;
+}
+
+.mode-description {
+  font-size: 0.9em;
+  color: #aaa;
+  margin-bottom: 8px;
+}
+
+.mode-stats {
+  display: flex;
+  gap: 12px;
+  font-size: 0.85em;
+  flex-wrap: wrap;
+}
+
+.mode-stat {
+  color: #ffd700;
+}
+
+.mode-button {
+  margin-top: 8px;
+  padding: 8px 16px;
+  background: #0ff;
+  color: #000;
+  border: none;
+  border-radius: 4px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.mode-button:hover {
+  background: #00ff00;
+  transform: scale(1.05);
+}
+
+.mode-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
