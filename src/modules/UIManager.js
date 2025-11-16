@@ -7,10 +7,15 @@ import NotificationSystem from '../utils/NotificationSystem.js';
  * Отделяет логику отображения от логики игры
  */
 export class UIManager {
-  constructor(player, dungeon, notifications) {
+  constructor(player, dungeon, notifications, questSystem = null, statistics = null, skillTree = null, gameModes = null, particleSystem = null) {
     this.player = player;
     this.dungeon = dungeon;
     this.notifications = notifications;
+    this.questSystem = questSystem;
+    this.statistics = statistics;
+    this.skillTree = skillTree;
+    this.gameModes = gameModes;
+    this.particleSystem = particleSystem;
 
     this.elements = {};
     this.cacheElements();
@@ -60,6 +65,12 @@ export class UIManager {
 
     // === Подземелья ===
     this.elements.towersDiv = document.querySelector('.towers');
+
+    // === Новые вкладки ===
+    this.elements.questsContainer = document.querySelector('.quests-container');
+    this.elements.statisticsContainer = document.querySelector('.statistics-container');
+    this.elements.skillsContainer = document.querySelector('.skills-container');
+    this.elements.gameModesContainer = document.querySelector('.game-modes-container');
   }
 
   initEventListeners() {
@@ -73,7 +84,7 @@ export class UIManager {
     });
 
     // === Кликер ===
-    this.elements.clickerBtn?.addEventListener('click', () => this.handleClick());
+    this.elements.clickerBtn?.addEventListener('click', (e) => this.handleClick(e));
     this.elements.upgradeBtn?.addEventListener('click', () => this.handleUpgrade());
     this.elements.prestigeBtn?.addEventListener('click', () => this.handlePrestige());
 
@@ -176,10 +187,29 @@ export class UIManager {
   }
 
   // === Обработчики кликов ===
-  handleClick() {
+  handleClick(e) {
     this.player.addClicks(1);
     this.elements.clicksSpan.textContent = this.player.clicks;
     this.updateProfile();
+
+    // Обновляем прогресс квеста
+    if (this.questSystem) {
+      this.questSystem.updateQuestProgress('clicks', 1);
+    }
+
+    // Записываем клик в статистику
+    if (this.statistics) {
+      this.statistics.recordClick(1);
+    }
+
+    // Парящие числа
+    if (this.particleSystem && e) {
+      const rect = this.elements.clickerBtn.getBoundingClientRect();
+      const x = rect.left + rect.width / 2;
+      const y = rect.top + rect.height / 2;
+      this.particleSystem.createFloatingText(x, y, `+${this.player.clickPower}`, '#0ff', 800);
+      this.particleSystem.createWaveEffect(this.elements.clickerBtn, '#0ff', 20);
+    }
   }
 
   handleUpgrade() {
@@ -203,6 +233,22 @@ export class UIManager {
         `Престиж совершен! Вы получили ${result.bonusDiamonds} алмазиков и +10% к приросту кликов!`,
         4000
       );
+      
+      // Запись престижа в статистику
+      if (this.statistics) {
+        this.statistics.recordPrestige();
+      }
+
+      // Обновляем прогресс квеста
+      if (this.questSystem) {
+        this.questSystem.updateQuestProgress('prestige', 1);
+      }
+
+      // Спецэффект уровня вверх
+      if (this.particleSystem && this.elements.prestigeBtn) {
+        this.particleSystem.createLevelUpEffect(this.elements.prestigeBtn);
+      }
+
       this.updateProfile();
       // Обновить кнопку престижа
       this.elements.prestigeBtn.textContent = `Престиж — ${this.player.prestigeCost} кликов`;
@@ -333,6 +379,224 @@ export class UIManager {
     this.notifications.success(
       `Вы получили: ${lootItem.name} (${lootItem.rarity}) — ${lootItem.effect}`
     );
+  }
+
+  // === Новые системы: Квесты, Статистика, Умения, Режимы ===
+
+  /**
+   * Обновить вкладку квестов
+   */
+  updateQuestsUI() {
+    if (!this.questSystem || !this.elements.questsContainer) return;
+
+    const stats = this.questSystem.getQuestStats();
+    const quests = this.questSystem.quests;
+
+    let html = `<div style="margin-bottom: 16px;">
+      <div style="font-size: 1.1em; margin-bottom: 8px;">Прогресс: ${stats.completed}/${stats.total} (${stats.percentComplete}%)</div>
+      <div style="background: #1a1f2e; height: 8px; border-radius: 4px; overflow: hidden;">
+        <div style="background: linear-gradient(90deg, #0f0, #0ff); height: 100%; width: ${stats.percentComplete}%; transition: width 0.3s;"></div>
+      </div>
+      <div style="color: #0f0; margin-top: 8px;">Награды: +${stats.totalRewardsExp} опыта, +${stats.totalRewardsDiamonds} алмазов</div>
+    </div>
+    <div class="daily-quests">`;
+
+    quests.forEach(quest => {
+      const isCompleted = this.questSystem.completedQuests.has(quest.id);
+      const progressPercent = Math.min((quest.progress / quest.target) * 100, 100);
+
+      html += `
+        <div class="quest-card ${isCompleted ? 'completed' : ''}">
+          <div class="quest-header">
+            <span class="quest-title">${quest.icon} ${quest.title}</span>
+            <span class="quest-reward">${quest.reward.diamonds}💎 ${quest.reward.exp}exp</span>
+          </div>
+          <div class="quest-description">${quest.description}</div>
+          <div class="quest-progress">
+            <div class="quest-progress-bar" style="width: ${progressPercent}%;"></div>
+          </div>
+          <div style="font-size: 0.85em; color: #aaa;">${quest.progress}/${quest.target}</div>
+        </div>
+      `;
+    });
+
+    html += '</div>';
+    this.elements.questsContainer.innerHTML = html;
+  }
+
+  /**
+   * Обновить вкладку статистики
+   */
+  updateStatisticsUI() {
+    if (!this.statistics || !this.elements.statisticsContainer) return;
+
+    const stats = this.statistics.getOverallStats();
+    const history = this.statistics.getPrestigeHistory();
+
+    let html = `<div class="stats-grid">
+      <div class="stat-box">
+        <div class="stat-label">Всего кликов</div>
+        <div class="stat-value">${stats.totalClicks.toLocaleString()}</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-label">Врагов побеждено</div>
+        <div class="stat-value">${stats.totalEnemiesDefeated}</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-label">Нанесено урона</div>
+        <div class="stat-value">${stats.totalDamageDealt.toLocaleString()}</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-label">Получено опыта</div>
+        <div class="stat-value">${stats.totalExpGained.toLocaleString()}</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-label">Престижей</div>
+        <div class="stat-value">${stats.prestigeCount}</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-label">Время игры</div>
+        <div class="stat-value" style="font-size: 0.9em;">${stats.playTime.formatted}</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-label">Урон за врага</div>
+        <div class="stat-value">${stats.averageDamagePerEnemy}</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-label">Предметов</div>
+        <div class="stat-value">${stats.totalItemsObtained}</div>
+      </div>
+    </div>
+
+    <div class="prestige-history">
+      <h3 style="color: #0ff; margin-bottom: 12px;">📋 История престижей</h3>
+      <table class="history-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Дата</th>
+            <th>Уровень</th>
+            <th>Кликов</th>
+            <th>Опыта</th>
+            <th>Множитель</th>
+          </tr>
+        </thead>
+        <tbody>`;
+
+    history.slice(-5).reverse().forEach(entry => {
+      html += `<tr>
+        <td>${entry.number}</td>
+        <td>${entry.date}</td>
+        <td>${entry.level}</td>
+        <td>${entry.totalClicks.toLocaleString()}</td>
+        <td>${entry.totalExp.toLocaleString()}</td>
+        <td>${entry.multiplier}</td>
+      </tr>`;
+    });
+
+    html += `</tbody></table></div>`;
+    this.elements.statisticsContainer.innerHTML = html;
+  }
+
+  /**
+   * Обновить вкладку умений
+   */
+  updateSkillsUI() {
+    if (!this.skillTree || !this.elements.skillsContainer) return;
+
+    const trees = this.skillTree.getFullSkillTrees();
+    let html = '';
+
+    trees.forEach(tree => {
+      html += `<div class="skill-tree">
+        <div class="tree-title">
+          <span class="tree-icon">${tree.icon}</span>
+          <span>${tree.name}</span>
+        </div>
+        <div style="font-size: 0.9em; color: #aaa; margin-bottom: 12px;">${tree.description}</div>
+        <div class="skill-nodes">`;
+
+      tree.skills.forEach(skill => {
+        const statusClass = skill.unlocked ? 'unlocked' : skill.requirementsMet ? '' : 'locked';
+        html += `<div class="skill-node ${statusClass}" title="${skill.description}">
+          <div class="skill-name">${skill.name}</div>
+          <div class="skill-bonus">${Object.entries(skill.bonus)
+            .filter(([k, v]) => v > 0)
+            .map(([k, v]) => `+${v}% ${k}`)
+            .join(', ') || 'Специальный'}</div>
+          <div class="skill-requirement">Уровень ${skill.requirements.level || 1}</div>
+        </div>`;
+      });
+
+      html += '</div></div>';
+    });
+
+    this.elements.skillsContainer.innerHTML = html;
+  }
+
+  /**
+   * Обновить вкладку режимов
+   */
+  updateGameModesUI() {
+    if (!this.gameModes || !this.elements.gameModesContainer) return;
+
+    const modes = this.gameModes.getAllModes();
+    let html = '<div class="modes-list">';
+
+    modes.forEach(mode => {
+      const canPlay = this.gameModes.checkRequirements(mode.requirements);
+      const disabled = !canPlay;
+
+      html += `<div class="mode-card" ${disabled ? 'style="opacity: 0.5;"' : ''}>
+        <div class="mode-name">${mode.icon} ${mode.name}</div>
+        <div class="mode-description">${mode.description}</div>
+        <div class="mode-stats">
+          ${typeof mode.rewards.exp === 'string' ? `<span class="mode-stat">Опыта: ${mode.rewards.exp}</span>` : ''}
+          ${typeof mode.rewards.diamonds === 'string' ? `<span class="mode-stat">Алмазов: ${mode.rewards.diamonds}</span>` : ''}
+          ${typeof mode.rewards.loot === 'string' ? `<span class="mode-stat">Лута: ${mode.rewards.loot}</span>` : ''}
+          ${mode.cooldown ? `<span class="mode-stat">⏱️ ${mode.cooldown}</span>` : ''}
+        </div>
+        ${mode.cost > 0 ? `<div style="margin-top: 8px; color: #ffd700;">Стоимость: ${mode.cost}💎</div>` : ''}
+        <button class="mode-button" ${disabled ? 'disabled' : ''} onclick="console.log('Режим: ${mode.id}')" style="margin-top: 8px;">
+          ${canPlay ? 'Играть' : `Нужен уровень ${mode.requirements.level}`}
+        </button>
+      </div>`;
+    });
+
+    html += '</div>';
+    this.elements.gameModesContainer.innerHTML = html;
+  }
+
+  /**
+   * Переключить вкладку с обновлением контента
+   */
+  switchTab(menuItem) {
+    const tabName = menuItem.dataset.tab;
+
+    // === Скрыть все вкладки ===
+    this.elements.tabs.forEach(tab => tab.classList.remove('active'));
+    this.elements.menuItems.forEach(item => item.classList.remove('active'));
+
+    // === Показать выбранную ===
+    const tab = document.getElementById(`tab-${tabName}`);
+    if (tab) {
+      tab.classList.add('active');
+      menuItem.classList.add('active');
+
+      // === Обновить содержимое новых вкладок ===
+      if (tabName === 'quests') {
+        this.updateQuestsUI();
+      } else if (tabName === 'statistics') {
+        this.updateStatisticsUI();
+      } else if (tabName === 'skills') {
+        this.updateSkillsUI();
+      } else if (tabName === 'modes') {
+        this.updateGameModesUI();
+      }
+    }
+
+    // === Закрыть сайдбар ===
+    this.toggleSidebar(false);
   }
 
   // === Кнопка сброса ===
