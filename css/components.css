@@ -1,80 +1,109 @@
 /* ===================================================
-   КОМПОНЕНТЫ И МОДАЛЬНЫЕ ОКНА
+   КОМПОНЕНТЫ И МОДАЛЬНЫЕ ОКНА (ОБНОВЛЕННЫЕ)
    =================================================== */
 
-/* МОДАЛЬНЫЕ ОКНА */
+/* МОДАЛЬНЫЕ ОКНА - ОСНОВНЫЕ СТИЛИ */
 .modal-overlay {
   position: fixed;
   left: 0;
   top: 0;
   width: 100vw;
   height: 100vh;
-  background: rgba(24, 28, 36, 0.92);
+  background: rgba(0, 0, 0, 0.8);
   z-index: 100000;
   display: flex;
   align-items: center;
   justify-content: center;
+  backdrop-filter: blur(4px);
+  animation: fadeIn 0.3s ease;
 }
 
 .modal-content {
-  background: #232b39;
+  background: linear-gradient(135deg, rgba(0, 20, 40, 0.98) 0%, rgba(10, 40, 50, 0.95) 100%);
   padding: 32px 28px;
   border-radius: 16px;
-  min-width: 220px;
+  min-width: 280px;
+  max-width: 95vw;
   text-align: center;
-  color: #fff;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+  color: #b8d4ff;
+  box-shadow: 0 0 40px rgba(0, 255, 255, 0.2), 0 8px 32px rgba(0, 0, 0, 0.6);
+  border: 2px solid rgba(0, 255, 255, 0.2);
+  animation: slideUp 0.3s ease;
 }
 
+.modal-content h2,
 .modal-content h3 {
   margin-top: 0;
   margin-bottom: 22px;
   font-size: 1.3em;
   color: #0ff;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
 }
 
 .modal-content button {
-  margin: 4px 0;
+  margin: 8px auto;
   display: block;
   width: 100%;
-  padding: 10px 14px;
-  border: none;
-  border-radius: 6px;
-  background: linear-gradient(90deg, #0ff 0%, #0f0 100%);
-  color: #222;
+  padding: 12px 16px;
+  border: 2px solid;
+  border-radius: 8px;
+  background: linear-gradient(135deg, rgba(0, 200, 255, 0.2) 0%, rgba(0, 100, 200, 0.15) 100%);
+  color: #0cf;
   cursor: pointer;
-  margin-bottom: 8px;
   font-weight: 600;
-  transition: all 0.2s;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-color: #0cf;
 }
 
 .modal-content button:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 255, 255, 0.3);
+  box-shadow: 0 6px 20px rgba(0, 200, 255, 0.3);
+  background: linear-gradient(135deg, rgba(0, 200, 255, 0.35) 0%, rgba(0, 100, 200, 0.25) 100%);
+}
+
+.modal-content button:active {
+  transform: translateY(0) scale(0.98);
 }
 
 .modal-content .cancel-btn {
-  background: linear-gradient(90deg, #e74c3c, #c0392b);
-  color: #fff;
+  background: linear-gradient(135deg, rgba(255, 100, 100, 0.2) 0%, rgba(200, 50, 50, 0.15) 100%);
+  color: #ff6464;
+  border-color: #ff6464;
 }
 
 .modal-content .cancel-btn:hover {
-  box-shadow: 0 4px 12px rgba(231, 76, 60, 0.3);
+  box-shadow: 0 6px 20px rgba(255, 100, 100, 0.3);
+  background: linear-gradient(135deg, rgba(255, 100, 100, 0.35) 0%, rgba(200, 50, 50, 0.25) 100%);
+}
+
+.modal-content .success-btn {
+  background: linear-gradient(135deg, rgba(0, 255, 0, 0.2) 0%, rgba(0, 200, 100, 0.15) 100%);
+  color: #0f0;
+  border-color: #0f0;
+}
+
+.modal-content .success-btn:hover {
+  box-shadow: 0 6px 20px rgba(0, 255, 0, 0.3);
+  background: linear-gradient(135deg, rgba(0, 255, 0, 0.35) 0%, rgba(0, 200, 100, 0.25) 100%);
 }
 
 /* ИНФОРМАЦИЯ О ДРОПЕ */
 .drop-info-content {
-  background: linear-gradient(135deg, #f8fafc 60%, #e0e7ef 100%);
-  color: #222;
-  border-radius: 22px;
-  padding: 44px 36px;
-  min-width: 320px;
+  background: linear-gradient(135deg, rgba(0, 30, 60, 0.95) 0%, rgba(20, 50, 80, 0.9) 100%);
+  color: #b8d4ff;
+  border-radius: 16px;
+  padding: 32px 24px;
+  min-width: 300px;
   max-width: 96vw;
-  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.5);
-  text-align: center;
+  box-shadow: 0 0 40px rgba(0, 200, 255, 0.2), 0 12px 48px rgba(0, 0, 0, 0.6);
+  text-align: left;
   position: relative;
   font-family: inherit;
-  border: 2px solid #dfe6e9;
+  border: 2px solid rgba(0, 200, 255, 0.2);
   max-height: 90vh;
   overflow-y: auto;
 }
@@ -82,65 +111,67 @@
 .drop-info-content h2 {
   margin-top: 0;
   margin-bottom: 22px;
-  font-size: 1.7em;
+  font-size: 1.5em;
   letter-spacing: 0.5px;
-  color: #2980b9;
-  text-shadow: 0 2px 8px #dfe6e9;
+  color: #0ff;
+  text-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+  text-transform: uppercase;
 }
 
 .drop-info-content table {
   width: 100%;
-  border-collapse: separate;
-  border-spacing: 0 10px;
-  margin-bottom: 28px;
-  font-size: 1.13em;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+  font-size: 0.95em;
 }
 
 .drop-info-content table thead {
-  background: #f7fafd;
-  color: #2980b9;
+  background: rgba(0, 150, 150, 0.2);
+  color: #0ff;
   font-weight: 700;
+  text-transform: uppercase;
 }
 
 .drop-info-content table th {
-  padding: 10px 12px;
-}
-
-.drop-info-content table th:first-child {
-  border-radius: 10px 0 0 10px;
-}
-
-.drop-info-content table th:last-child {
-  border-radius: 0 10px 10px 0;
+  padding: 12px;
+  border-bottom: 2px solid rgba(0, 200, 255, 0.3);
+  text-align: left;
 }
 
 .drop-info-content table td {
   padding: 10px 12px;
   text-align: left;
+  border-bottom: 1px solid rgba(0, 200, 255, 0.1);
+  color: #b8d4ff;
 }
 
-.drop-info-content table tr {
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
+.drop-info-content table tbody tr:hover {
+  background: rgba(0, 200, 255, 0.05);
 }
 
 .close-drop-info {
-  background: linear-gradient(90deg, #e74c3c, #c0392b);
-  color: #fff;
-  border: none;
+  background: linear-gradient(135deg, rgba(255, 100, 100, 0.2) 0%, rgba(200, 50, 50, 0.15) 100%);
+  color: #ff6464;
+  border: 2px solid #ff6464;
   border-radius: 10px;
-  padding: 14px 44px;
-  font-size: 1.13em;
+  padding: 12px 32px;
+  font-size: 1em;
   cursor: pointer;
-  box-shadow: 0 2px 12px rgba(231, 76, 60, 0.2);
-  transition: background 0.2s;
+  box-shadow: 0 4px 15px rgba(255, 100, 100, 0.2);
+  transition: all 0.3s ease;
   font-weight: 600;
   letter-spacing: 0.5px;
+  text-transform: uppercase;
 }
 
 .close-drop-info:hover {
-  background: linear-gradient(90deg, #c0392b, #a93226);
-  box-shadow: 0 4px 16px rgba(231, 76, 60, 0.4);
+  background: linear-gradient(135deg, rgba(255, 100, 100, 0.35) 0%, rgba(200, 50, 50, 0.25) 100%);
+  box-shadow: 0 6px 25px rgba(255, 100, 100, 0.4);
+  transform: translateY(-2px);
+}
+
+.close-drop-info:active {
+  transform: translateY(0) scale(0.98);
 }
 
 /* ИНТЕРФЕЙС ПОДЗЕМЕЛЬЯ */
@@ -151,136 +182,176 @@
   top: 0;
   width: 100vw;
   height: 100vh;
-  background: linear-gradient(135deg, #181c24 60%, #232b39 100%);
+  background: linear-gradient(135deg, rgba(0, 20, 40, 0.95) 0%, rgba(10, 40, 50, 0.9) 100%);
   z-index: 99999;
   display: flex;
   align-items: center;
   justify-content: center;
+  backdrop-filter: blur(3px);
 }
 
 #dungeonUI > div,
 #trainingBattleUI > div {
-  background: rgba(24, 28, 36, 0.98);
-  border-radius: 18px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
-  padding: 36px 44px;
-  min-width: 340px;
+  background: linear-gradient(135deg, rgba(0, 30, 60, 0.98) 0%, rgba(20, 50, 80, 0.95) 100%);
+  border-radius: 16px;
+  box-shadow: 0 0 40px rgba(0, 255, 255, 0.2), 0 8px 32px rgba(0, 0, 0, 0.6);
+  padding: 32px 40px;
+  min-width: 320px;
   max-width: 96vw;
   text-align: center;
   position: relative;
-  color: #fff;
+  color: #b8d4ff;
+  border: 2px solid rgba(0, 200, 255, 0.2);
 }
 
 #dungeonUI h2,
 #trainingBattleUI h2 {
-  margin-bottom: 10px;
-  font-size: 1.5em;
+  margin-bottom: 20px;
+  font-size: 1.4em;
   color: #0ff;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
 }
 
 #dungeonUI div > div,
 #trainingBattleUI div > div {
-  margin-bottom: 10px;
-  font-size: 1.1em;
+  margin-bottom: 12px;
+  font-size: 1em;
+  color: #b8d4ff;
 }
 
 #dungeonMsg,
 #trainMsg {
-  margin-top: 18px;
-  min-height: 32px;
-  color: #fff;
-  font-weight: 500;
+  margin-top: 20px;
+  min-height: 40px;
+  color: #0ff;
+  font-weight: 600;
+  font-size: 1.05em;
+  animation: pulse 2s ease-in-out infinite;
 }
 
 #dungeonAttackBtn,
 #trainAttackBtn {
-  background: #27ae60;
-  color: #fff;
-  padding: 10px 28px;
-  border: none;
-  border-radius: 7px;
-  font-size: 1.1em;
-  margin: 0 8px 12px 0;
+  background: linear-gradient(135deg, rgba(0, 255, 0, 0.2) 0%, rgba(0, 200, 100, 0.15) 100%);
+  color: #0f0;
+  border: 2px solid #0f0;
+  padding: 12px 28px;
+  border-radius: 8px;
+  font-size: 1em;
+  margin: 8px 8px 12px 0;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: all 0.3s ease;
   font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 #dungeonAttackBtn:hover,
 #trainAttackBtn:hover {
-  background: #229954;
-  box-shadow: 0 4px 12px rgba(39, 174, 96, 0.3);
+  background: linear-gradient(135deg, rgba(0, 255, 0, 0.35) 0%, rgba(0, 200, 100, 0.25) 100%);
+  box-shadow: 0 6px 20px rgba(0, 255, 0, 0.3);
+  transform: translateY(-2px);
+}
+
+#dungeonAttackBtn:active,
+#trainAttackBtn:active {
+  transform: translateY(0) scale(0.98);
 }
 
 #dungeonHealBtn,
 #trainHealBtn {
-  background: #2980b9;
-  color: #fff;
-  padding: 10px 18px;
-  border: none;
-  border-radius: 7px;
-  font-size: 1.1em;
-  margin: 0 8px 12px 0;
+  background: linear-gradient(135deg, rgba(100, 200, 255, 0.2) 0%, rgba(50, 150, 200, 0.15) 100%);
+  color: #64c8ff;
+  border: 2px solid #64c8ff;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 1em;
+  margin: 8px 8px 12px 0;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: all 0.3s ease;
   font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 #dungeonHealBtn:hover,
 #trainHealBtn:hover {
-  background: #2471a3;
-  box-shadow: 0 4px 12px rgba(41, 128, 185, 0.3);
+  background: linear-gradient(135deg, rgba(100, 200, 255, 0.35) 0%, rgba(50, 150, 200, 0.25) 100%);
+  box-shadow: 0 6px 20px rgba(100, 200, 255, 0.3);
+  transform: translateY(-2px);
+}
+
+#dungeonHealBtn:active,
+#trainHealBtn:active {
+  transform: translateY(0) scale(0.98);
 }
 
 #dungeonExitBtn {
-  background: #f1c40f;
-  color: #222;
-  padding: 10px 18px;
-  border: none;
-  border-radius: 7px;
-  font-size: 1.1em;
-  margin: 0 8px 12px 0;
+  background: linear-gradient(135deg, rgba(255, 165, 0, 0.2) 0%, rgba(255, 100, 0, 0.15) 100%);
+  color: #ffa500;
+  border: 2px solid #ffa500;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 1em;
+  margin: 8px 8px 12px 0;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: all 0.3s ease;
   font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 #dungeonExitBtn:hover {
-  background: #f4d03f;
-  box-shadow: 0 4px 12px rgba(241, 196, 15, 0.3);
+  background: linear-gradient(135deg, rgba(255, 165, 0, 0.35) 0%, rgba(255, 100, 0, 0.25) 100%);
+  box-shadow: 0 6px 20px rgba(255, 165, 0, 0.3);
+  transform: translateY(-2px);
+}
+
+#dungeonExitBtn:active {
+  transform: translateY(0) scale(0.98);
 }
 
 #dungeonGiveUpBtn,
 #trainExitBtn {
-  background: #e74c3c;
-  color: #fff;
-  padding: 10px 18px;
-  border: none;
-  border-radius: 7px;
-  font-size: 1.1em;
-  margin: 0 8px 12px 0;
+  background: linear-gradient(135deg, rgba(255, 100, 100, 0.2) 0%, rgba(200, 50, 50, 0.15) 100%);
+  color: #ff6464;
+  border: 2px solid #ff6464;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 1em;
+  margin: 8px 8px 12px 0;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: all 0.3s ease;
   font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 #dungeonGiveUpBtn:hover,
 #trainExitBtn:hover {
-  background: #c0392b;
-  box-shadow: 0 4px 12px rgba(231, 76, 60, 0.3);
+  background: linear-gradient(135deg, rgba(255, 100, 100, 0.35) 0%, rgba(200, 50, 50, 0.25) 100%);
+  box-shadow: 0 6px 20px rgba(255, 100, 100, 0.3);
+  transform: translateY(-2px);
+}
+
+#dungeonGiveUpBtn:active,
+#trainExitBtn:active {
+  transform: translateY(0) scale(0.98);
 }
 
 /* ПРОГРЕСС-БАР */
 #expBar {
   height: 100%;
-  background: linear-gradient(90deg, #0ff, #0f0, #000);
+  background: linear-gradient(90deg, #0f0 0%, #0ff 50%, #00f 100%);
   width: 0%;
-  transition: width 0.3s;
+  transition: width 0.3s ease;
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.4) inset;
 }
 
 #healthInner {
   height: 100%;
-  background: linear-gradient(90deg, #27ae60, #2ecc40);
+  background: linear-gradient(90deg, #0f0 0%, #00ff00 100%);
   width: 100%;
   transition: width 0.3s;
 }
