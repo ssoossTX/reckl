@@ -1408,6 +1408,420 @@ button:disabled {
 }
 
 /* ===================================================
+   ЭЛЕМЕНТЫ ИНВЕНТАРЯ И СПОСОБНОСТЕЙ
+   =================================================== */
+
+.inventory-item,
+.ability-card {
+  background: linear-gradient(135deg, rgba(0, 150, 200, 0.2) 0%, rgba(50, 100, 150, 0.15) 100%);
+  border: 2px solid rgba(0, 200, 255, 0.2);
+  border-radius: 10px;
+  padding: 12px;
+  margin: 8px 0;
+  transition: all 0.3s ease;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.inventory-item:hover,
+.ability-card:hover {
+  border-color: rgba(0, 200, 255, 0.5);
+  box-shadow: 0 4px 15px rgba(0, 200, 255, 0.2);
+  background: linear-gradient(135deg, rgba(0, 150, 200, 0.35) 0%, rgba(50, 100, 150, 0.25) 100%);
+}
+
+.item-info,
+.ability-info {
+  flex: 1;
+  color: #b8d4ff;
+}
+
+.item-name,
+.ability-name {
+  color: #0ff;
+  font-weight: 700;
+  margin: 0;
+  font-size: 1em;
+}
+
+.item-description,
+.ability-description {
+  color: #7eb3ff;
+  font-size: 0.9em;
+  margin: 4px 0 0 0;
+  line-height: 1.4;
+}
+
+.item-count {
+  background: rgba(0, 255, 255, 0.2);
+  border: 1px solid rgba(0, 255, 255, 0.3);
+  border-radius: 8px;
+  padding: 6px 12px;
+  color: #0ff;
+  font-weight: 600;
+  font-size: 0.95em;
+  margin-left: 12px;
+  min-width: 50px;
+  text-align: center;
+}
+
+.ability-level {
+  background: rgba(255, 165, 0, 0.2);
+  border: 1px solid rgba(255, 165, 0, 0.3);
+  border-radius: 8px;
+  padding: 6px 12px;
+  color: #ffa500;
+  font-weight: 600;
+  font-size: 0.9em;
+  margin: 0 8px 0 12px;
+}
+
+.ability-level::before {
+  content: 'Lvl ';
+}
+
+/* ===================================================
+   ИНФОРМАЦИОННЫЕ БОКСЫ И СТАТУСЫ
+   =================================================== */
+
+.info-box {
+  background: linear-gradient(135deg, rgba(100, 150, 255, 0.15) 0%, rgba(50, 100, 200, 0.1) 100%);
+  border: 2px solid rgba(100, 150, 255, 0.2);
+  border-radius: 10px;
+  padding: 14px;
+  margin: 12px 0;
+  color: #b8d4ff;
+  line-height: 1.6;
+}
+
+.info-box strong {
+  color: #64f;
+}
+
+.warning-box {
+  background: linear-gradient(135deg, rgba(255, 165, 0, 0.15) 0%, rgba(200, 100, 0, 0.1) 100%);
+  border: 2px solid rgba(255, 165, 0, 0.3);
+  border-radius: 10px;
+  padding: 14px;
+  margin: 12px 0;
+  color: #ffcb7a;
+}
+
+.error-box {
+  background: linear-gradient(135deg, rgba(255, 100, 100, 0.15) 0%, rgba(200, 50, 50, 0.1) 100%);
+  border: 2px solid rgba(255, 100, 100, 0.3);
+  border-radius: 10px;
+  padding: 14px;
+  margin: 12px 0;
+  color: #ffb3b3;
+}
+
+.success-box {
+  background: linear-gradient(135deg, rgba(0, 255, 0, 0.15) 0%, rgba(0, 200, 100, 0.1) 100%);
+  border: 2px solid rgba(0, 255, 0, 0.3);
+  border-radius: 10px;
+  padding: 14px;
+  margin: 12px 0;
+  color: #80ff80;
+}
+
+/* ===================================================
+   ТАБЛИЦЫ И СПИСКИ
+   =================================================== */
+
+.stats-table,
+.inventory-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 12px 0;
+}
+
+.stats-table th,
+.stats-table td,
+.inventory-table th,
+.inventory-table td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid rgba(0, 255, 255, 0.1);
+  color: #b8d4ff;
+  font-size: 0.95em;
+}
+
+.stats-table th,
+.inventory-table th {
+  background: rgba(0, 100, 150, 0.2);
+  color: #0ff;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.stats-table tr:hover,
+.inventory-table tr:hover {
+  background: rgba(0, 200, 255, 0.08);
+}
+
+.stats-table tr:nth-child(even),
+.inventory-table tr:nth-child(even) {
+  background: rgba(0, 0, 0, 0.15);
+}
+
+/* ===================================================
+   ЗНАЧКИ И ИКОНКИ
+   =================================================== */
+
+.badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 0.85em;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  margin-right: 6px;
+}
+
+.badge.rare {
+  background: rgba(0, 100, 255, 0.2);
+  border: 1px solid #00f;
+  color: #00f;
+}
+
+.badge.epic {
+  background: rgba(180, 0, 255, 0.2);
+  border: 1px solid #b400ff;
+  color: #b400ff;
+}
+
+.badge.legendary {
+  background: rgba(255, 215, 0, 0.2);
+  border: 1px solid #ffd700;
+  color: #ffd700;
+}
+
+.badge.common {
+  background: rgba(0, 200, 255, 0.2);
+  border: 1px solid #0cf;
+  color: #0cf;
+}
+
+.badge.active {
+  background: rgba(0, 255, 0, 0.2);
+  border: 1px solid #0f0;
+  color: #0f0;
+}
+
+.badge.inactive {
+  background: rgba(100, 100, 100, 0.2);
+  border: 1px solid #888;
+  color: #888;
+}
+
+/* ===================================================
+   ПРОГРЕСС-БАРЫ И ИНДИКАТОРЫ
+   =================================================== */
+
+.progress-container {
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(0, 255, 255, 0.15);
+  border-radius: 10px;
+  height: 16px;
+  overflow: hidden;
+  margin: 8px 0;
+  position: relative;
+}
+
+.progress-bar {
+  background: linear-gradient(90deg, #0f0 0%, #0ff 50%, #00f 100%);
+  height: 100%;
+  transition: width 0.3s ease;
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.4) inset,
+              0 0 10px rgba(0, 255, 0, 0.2);
+  position: relative;
+}
+
+.progress-bar::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.3) 50%, transparent 100%);
+  animation: shimmer 2s infinite;
+}
+
+.progress-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.85em;
+  z-index: 10;
+  text-shadow: 0 0 5px rgba(0, 0, 0, 0.8);
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+.exp-bar {
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 165, 0, 0.2);
+  border-radius: 8px;
+  height: 14px;
+  overflow: hidden;
+  margin: 8px 0;
+}
+
+.exp-bar-fill {
+  background: linear-gradient(90deg, #ffa500 0%, #ffb81c 100%);
+  height: 100%;
+  transition: width 0.3s ease;
+  box-shadow: 0 0 10px rgba(255, 165, 0, 0.4) inset;
+}
+
+/* ===================================================
+   ФОРМЫ И ВХОДЫ
+   =================================================== */
+
+input[type="text"],
+input[type="number"],
+input[type="email"],
+textarea,
+select {
+  background: linear-gradient(135deg, rgba(0, 50, 100, 0.3) 0%, rgba(30, 30, 80, 0.2) 100%);
+  border: 2px solid rgba(0, 200, 255, 0.2);
+  border-radius: 8px;
+  color: #b8d4ff;
+  padding: 10px 14px;
+  font-size: 1em;
+  font-family: inherit;
+  transition: all 0.3s ease;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus,
+input[type="email"]:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border-color: rgba(0, 200, 255, 0.6);
+  box-shadow: 0 0 15px rgba(0, 200, 255, 0.3), inset 0 0 10px rgba(0, 200, 255, 0.05);
+  background: linear-gradient(135deg, rgba(0, 80, 150, 0.4) 0%, rgba(50, 50, 120, 0.3) 100%);
+}
+
+input[type="text"]::placeholder,
+textarea::placeholder {
+  color: #5c7fa4;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 80px;
+  font-family: monospace;
+}
+
+/* ===================================================
+   АДАПТИВНОСТЬ ДЛЯ НОВЫХ КОМПОНЕНТОВ
+   =================================================== */
+
+@media (max-width: 900px) {
+  .inventory-item,
+  .ability-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .item-count,
+  .ability-level {
+    margin-left: 0;
+    margin-top: 8px;
+    width: 100%;
+  }
+
+  .stats-table th,
+  .stats-table td,
+  .inventory-table th,
+  .inventory-table td {
+    padding: 8px 6px;
+    font-size: 0.9em;
+  }
+
+  .modal-content {
+    padding: 24px;
+  }
+
+  .modal-buttons {
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 600px) {
+  .modal-content {
+    margin: 20px;
+    padding: 20px;
+    border-radius: 12px;
+  }
+
+  .modal-close-btn {
+    top: 8px;
+    right: 8px;
+    width: 36px;
+    height: 36px;
+  }
+
+  .inventory-item,
+  .ability-card {
+    padding: 10px;
+  }
+
+  .item-name,
+  .ability-name {
+    font-size: 0.95em;
+  }
+
+  .item-description,
+  .ability-description {
+    font-size: 0.85em;
+  }
+
+  .stats-table,
+  .inventory-table {
+    font-size: 0.85em;
+  }
+
+  .stats-table th,
+  .stats-table td,
+  .inventory-table th,
+  .inventory-table td {
+    padding: 6px 4px;
+  }
+
+  input[type="text"],
+  input[type="number"],
+  input[type="email"],
+  textarea,
+  select {
+    padding: 8px 10px;
+    font-size: 1em;
+  }
+
+  .info-box,
+  .warning-box,
+  .error-box,
+  .success-box {
+    padding: 12px;
+  }
+}
+
+/* ===================================================
    УТИЛИТЫ
    =================================================== */
 
