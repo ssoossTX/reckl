@@ -61,7 +61,6 @@ body, html {
   padding: 0 20px;
   gap: 30px;
   font-family: 'Segoe UI', Arial, sans-serif;
-  position: relative;
 }
 
 /* Левая часть: Уровень и имя */
@@ -280,7 +279,7 @@ body, html {
   }
 
   .header-left {
-    width: calc(100% - 50px);
+    width: 100%;
     gap: 8px;
   }
 
@@ -315,12 +314,12 @@ body, html {
   }
 
   .hamburger {
-    position: absolute;
-    top: 50%;
-    right: 10px;
-    transform: translateY(-50%);
-    width: 42px;
-    height: 42px;
+    position: fixed;
+    top: 90px;
+    left: 12px;
+    width: 44px;
+    height: 44px;
+    z-index: 9999;
   }
 }
 
@@ -335,8 +334,8 @@ body, html {
    =================================================== */
 
 .hamburger {
-  position: absolute;
-  top: 16px;
+  position: fixed;
+  top: 90px;
   left: 16px;
   width: 48px;
   height: 48px;
@@ -348,7 +347,7 @@ body, html {
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  z-index: 10001;
+  z-index: 9999;
   transition: all 0.3s ease;
   box-shadow: 0 0 15px rgba(0, 255, 255, 0.2);
 }
