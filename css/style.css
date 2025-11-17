@@ -508,76 +508,130 @@ main {
   flex-direction: column;
   align-items: center;
   margin-top: 40px;
+  padding: 24px;
+  background: linear-gradient(135deg, rgba(0, 255, 255, 0.05) 0%, rgba(0, 255, 0, 0.02) 100%);
+  border-radius: 16px;
+  border: 2px solid rgba(0, 255, 255, 0.2);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
 }
 
 .clicker-btn {
-  width: 160px;
-  height: 160px;
+  width: 180px;
+  height: 180px;
   border-radius: 50%;
-  border: none;
-  background: radial-gradient(circle at 30% 30%, #00f 0%, #0f0 60%, #000 100%);
-  box-shadow: 0 0 32px 8px rgba(0, 255, 255, 0.2), 0 0 0 8px rgba(0, 0, 0, 0.1) inset;
+  border: 4px solid #0ff;
+  background: radial-gradient(circle at 35% 35%, #00ff00 0%, #0088ff 40%, #001100 100%);
+  box-shadow: 0 0 40px 12px rgba(0, 255, 255, 0.3), 0 0 0 12px rgba(0, 0, 0, 0.2) inset;
   cursor: pointer;
-  margin-bottom: 24px;
-  transition: transform 0.1s, box-shadow 0.2s;
+  margin-bottom: 28px;
+  transition: all 0.1s ease;
   position: relative;
+  font-weight: bold;
+  font-size: 2em;
+  color: transparent;
+}
+
+.clicker-btn::before {
+  content: '⚔️';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 3em;
+  animation: bounce 0.6s infinite;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translate(-50%, -50%) scale(1); }
+  50% { transform: translate(-50%, -60%) scale(1.1); }
+}
+
+.clicker-btn:hover {
+  box-shadow: 0 0 60px 20px rgba(0, 255, 255, 0.5), 0 0 0 12px rgba(0, 0, 0, 0.2) inset;
 }
 
 .clicker-btn:active {
-  transform: scale(0.96);
-  box-shadow: 0 0 48px 16px var(--primary-color), 0 0 0 8px #000 inset;
+  transform: scale(0.92);
+  box-shadow: 0 0 80px 28px rgba(0, 255, 0, 0.6), 0 0 0 12px rgba(0, 0, 0, 0.3) inset;
 }
 
 .clicker-stats {
-  font-size: 1.5em;
-  color: var(--light-text);
-  margin-bottom: 18px;
-  text-shadow: 0 2px 8px #000;
+  font-size: 1.8em;
+  color: #0ff;
+  margin-bottom: 20px;
+  text-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+  font-weight: bold;
 }
 
 .upgrades {
-  margin-bottom: 18px;
+  margin-bottom: 24px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
 .upgrade-btn {
-  padding: 10px 24px;
-  font-size: 1em;
-  border: none;
-  border-radius: var(--border-radius);
-  background: linear-gradient(90deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-  color: var(--dark-text);
+  padding: 14px 28px;
+  font-size: 1.05em;
+  border: 2px solid #0ff;
+  border-radius: 10px;
+  background: linear-gradient(135deg, rgba(0, 255, 255, 0.15) 0%, rgba(0, 255, 0, 0.08) 100%);
+  color: #0ff;
   cursor: pointer;
-  margin-right: 10px;
-  margin-bottom: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-  transition: var(--transition);
+  box-shadow: 0 4px 15px rgba(0, 255, 255, 0.2);
+  transition: all 0.3s ease;
   font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
 .upgrade-btn:hover {
-  background: linear-gradient(90deg, var(--secondary-color) 0%, var(--primary-color) 100%);
+  background: linear-gradient(135deg, rgba(0, 255, 255, 0.3) 0%, rgba(0, 255, 0, 0.15) 100%);
+  box-shadow: 0 6px 25px rgba(0, 255, 255, 0.4);
+  transform: translateY(-2px);
+}
+
+.upgrade-btn:active {
+  transform: translateY(0px) scale(0.98);
 }
 
 .upgrade-btn:disabled {
-  opacity: 0.5;
+  opacity: 0.4;
   cursor: not-allowed;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
 .prestige-btn {
-  padding: 10px 24px;
-  font-size: 1em;
-  border: none;
-  border-radius: var(--border-radius);
-  background: linear-gradient(90deg, #222 0%, var(--primary-color) 100%);
-  color: var(--light-text);
+  padding: 16px 32px;
+  font-size: 1.1em;
+  border: 2px solid #ffd700;
+  border-radius: 10px;
+  background: linear-gradient(135deg, rgba(255, 215, 0, 0.15) 0%, rgba(255, 165, 0, 0.08) 100%);
+  color: #ffd700;
   cursor: pointer;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-  transition: var(--transition);
-  font-weight: 600;
+  box-shadow: 0 4px 15px rgba(255, 215, 0, 0.2);
+  transition: all 0.3s ease;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  width: 100%;
+  margin-top: 8px;
 }
 
 .prestige-btn:hover {
-  background: linear-gradient(90deg, var(--primary-color) 0%, #222 100%);
+  background: linear-gradient(135deg, rgba(255, 215, 0, 0.3) 0%, rgba(255, 165, 0, 0.15) 100%);
+  box-shadow: 0 6px 25px rgba(255, 215, 0, 0.4);
+  transform: translateY(-2px);
+}
+
+.prestige-btn:active {
+  transform: translateY(0px) scale(0.98);
+}
+
+.prestige-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
 }
 
 /* ===================================================
@@ -590,25 +644,50 @@ main {
 .cases,
 .expeditions,
 .towers {
-  background: rgba(0, 0, 0, 0.5);
-  border-radius: 12px;
-  padding: 18px 24px;
-  margin-bottom: 18px;
-  color: var(--light-text);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-  backdrop-filter: blur(5px);
+  background: linear-gradient(135deg, rgba(0, 20, 40, 0.6) 0%, rgba(10, 40, 50, 0.5) 100%);
+  border: 2px solid rgba(0, 255, 255, 0.15);
+  border-radius: 14px;
+  padding: 24px;
+  margin-bottom: 20px;
+  color: #b8d4ff;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4), inset 0 0 20px rgba(0, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+}
+
+.profile-info:hover,
+.inventory:hover,
+.abilities:hover,
+.cases:hover,
+.expeditions:hover,
+.towers:hover {
+  border-color: rgba(0, 255, 255, 0.3);
+  box-shadow: 0 6px 30px rgba(0, 255, 255, 0.15), inset 0 0 20px rgba(0, 255, 255, 0.08);
 }
 
 .profile-info h2,
 .inventory h3,
-.abilities h3 {
+.abilities h3,
+.cases h3,
+.expeditions h3,
+.towers h3 {
   margin-top: 0;
-  color: var(--primary-color);
+  color: #0ff;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 1.15em;
+  text-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+  border-bottom: 2px solid rgba(0, 255, 255, 0.2);
+  padding-bottom: 12px;
+  margin-bottom: 16px;
 }
 
 .profile-info div,
 .inventory div,
-.abilities div {
+.abilities div,
+.cases div,
+.expeditions div,
+.towers div {
   margin: 12px 0;
   line-height: 1.6;
 }
@@ -622,72 +701,182 @@ main {
 .tower-btn,
 .ability-up,
 .use-item-btn {
-  padding: 10px 20px;
-  margin: 8px;
-  border: none;
-  border-radius: var(--border-radius);
+  padding: 12px 24px;
+  margin: 10px;
+  border: 2px solid;
+  border-radius: 12px;
   font-size: 1em;
   cursor: pointer;
-  background: linear-gradient(90deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-  color: var(--dark-text);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-  transition: var(--transition);
-  font-weight: 500;
+  color: #fff;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
+/* Обычная рарность */
+.case-btn {
+  background: linear-gradient(135deg, rgba(0, 200, 255, 0.2) 0%, rgba(0, 100, 200, 0.15) 100%);
+  border-color: #0cf;
+  color: #0cf;
+  box-shadow: 0 4px 15px rgba(0, 200, 255, 0.2);
+}
+
+.case-btn:hover {
+  background: linear-gradient(135deg, rgba(0, 200, 255, 0.35) 0%, rgba(0, 100, 200, 0.25) 100%);
+  box-shadow: 0 6px 25px rgba(0, 200, 255, 0.4);
+  transform: translateY(-2px);
+}
+
+.case-btn:active {
+  transform: translateY(0) scale(0.98);
+}
+
+/* Редкая рарность */
 .case-btn.rare {
-  background: linear-gradient(90deg, var(--primary-color) 0%, #00f 100%);
+  background: linear-gradient(135deg, rgba(0, 100, 255, 0.2) 0%, rgba(100, 0, 200, 0.15) 100%);
+  border-color: #00f;
+  color: #00f;
+  box-shadow: 0 4px 15px rgba(0, 100, 255, 0.2);
 }
 
+.case-btn.rare:hover {
+  background: linear-gradient(135deg, rgba(0, 100, 255, 0.35) 0%, rgba(100, 0, 200, 0.25) 100%);
+  box-shadow: 0 6px 25px rgba(0, 100, 255, 0.4);
+  transform: translateY(-2px);
+}
+
+/* Эпическая рарность */
 .case-btn.epic {
-  background: linear-gradient(90deg, var(--primary-color) 0%, #000 100%);
-  color: var(--light-text);
+  background: linear-gradient(135deg, rgba(180, 0, 255, 0.2) 0%, rgba(100, 0, 150, 0.15) 100%);
+  border-color: #b400ff;
+  color: #b400ff;
+  box-shadow: 0 4px 15px rgba(180, 0, 255, 0.2);
 }
 
+.case-btn.epic:hover {
+  background: linear-gradient(135deg, rgba(180, 0, 255, 0.35) 0%, rgba(100, 0, 150, 0.25) 100%);
+  box-shadow: 0 6px 25px rgba(180, 0, 255, 0.4);
+  transform: translateY(-2px);
+}
+
+/* Экспедиции - по сложности */
 .expedition-btn {
-  background: linear-gradient(90deg, #3498db 0%, #2980b9 100%);
-  color: var(--light-text);
+  background: linear-gradient(135deg, rgba(0, 255, 0, 0.2) 0%, rgba(0, 200, 100, 0.15) 100%);
+  border-color: #0f0;
+  color: #0f0;
+  box-shadow: 0 4px 15px rgba(0, 255, 0, 0.2);
+}
+
+.expedition-btn:hover {
+  background: linear-gradient(135deg, rgba(0, 255, 0, 0.35) 0%, rgba(0, 200, 100, 0.25) 100%);
+  box-shadow: 0 6px 25px rgba(0, 255, 0, 0.4);
+  transform: translateY(-2px);
 }
 
 .expedition-btn.training {
-  background: linear-gradient(90deg, #f39c12 0%, #e67e22 100%);
-  color: var(--light-text);
+  background: linear-gradient(135deg, rgba(255, 165, 0, 0.2) 0%, rgba(255, 100, 0, 0.15) 100%);
+  border-color: #ffa500;
+  color: #ffa500;
+  box-shadow: 0 4px 15px rgba(255, 165, 0, 0.2);
 }
 
+.expedition-btn.training:hover {
+  background: linear-gradient(135deg, rgba(255, 165, 0, 0.35) 0%, rgba(255, 100, 0, 0.25) 100%);
+  box-shadow: 0 6px 25px rgba(255, 165, 0, 0.4);
+  transform: translateY(-2px);
+}
+
+.expedition-btn.normal {
+  background: linear-gradient(135deg, rgba(50, 150, 255, 0.2) 0%, rgba(0, 100, 200, 0.15) 100%);
+  border-color: #3296ff;
+  color: #3296ff;
+  box-shadow: 0 4px 15px rgba(50, 150, 255, 0.2);
+}
+
+.expedition-btn.normal:hover {
+  background: linear-gradient(135deg, rgba(50, 150, 255, 0.35) 0%, rgba(0, 100, 200, 0.25) 100%);
+  box-shadow: 0 6px 25px rgba(50, 150, 255, 0.4);
+  transform: translateY(-2px);
+}
+
+.expedition-btn.hard {
+  background: linear-gradient(135deg, rgba(255, 0, 100, 0.2) 0%, rgba(200, 0, 50, 0.15) 100%);
+  border-color: #ff0064;
+  color: #ff0064;
+  box-shadow: 0 4px 15px rgba(255, 0, 100, 0.2);
+}
+
+.expedition-btn.hard:hover {
+  background: linear-gradient(135deg, rgba(255, 0, 100, 0.35) 0%, rgba(200, 0, 50, 0.25) 100%);
+  box-shadow: 0 6px 25px rgba(255, 0, 100, 0.4);
+  transform: translateY(-2px);
+}
+
+.expedition-btn.extreme {
+  background: linear-gradient(135deg, rgba(255, 0, 255, 0.2) 0%, rgba(150, 0, 150, 0.15) 100%);
+  border-color: #ff00ff;
+  color: #ff00ff;
+  box-shadow: 0 4px 15px rgba(255, 0, 255, 0.2);
+}
+
+.expedition-btn.extreme:hover {
+  background: linear-gradient(135deg, rgba(255, 0, 255, 0.35) 0%, rgba(150, 0, 150, 0.25) 100%);
+  box-shadow: 0 6px 25px rgba(255, 0, 255, 0.4);
+  transform: translateY(-2px);
+}
+
+/* Башни */
 .tower-btn {
-  background: linear-gradient(90deg, var(--accent-color) 0%, #6c3483 100%);
-  color: var(--light-text);
+  background: linear-gradient(135deg, rgba(255, 215, 0, 0.2) 0%, rgba(255, 165, 0, 0.15) 100%);
+  border-color: #ffd700;
+  color: #ffd700;
+  box-shadow: 0 4px 15px rgba(255, 215, 0, 0.2);
+}
+
+.tower-btn:hover {
+  background: linear-gradient(135deg, rgba(255, 215, 0, 0.35) 0%, rgba(255, 165, 0, 0.25) 100%);
+  box-shadow: 0 6px 25px rgba(255, 215, 0, 0.4);
+  transform: translateY(-2px);
+}
+
+.tower-btn:active {
+  transform: translateY(0) scale(0.98);
+}
+
+/* Общие кнопки действий */
+.ability-up,
+.use-item-btn {
+  background: linear-gradient(135deg, rgba(100, 200, 255, 0.2) 0%, rgba(50, 150, 200, 0.15) 100%);
+  border-color: #64c8ff;
+  color: #64c8ff;
+  box-shadow: 0 4px 15px rgba(100, 200, 255, 0.2);
+}
+
+.ability-up:hover,
+.use-item-btn:hover {
+  background: linear-gradient(135deg, rgba(100, 200, 255, 0.35) 0%, rgba(50, 150, 200, 0.25) 100%);
+  box-shadow: 0 6px 25px rgba(100, 200, 255, 0.4);
+  transform: translateY(-2px);
+}
+
+.ability-up:active,
+.use-item-btn:active {
+  transform: translateY(0) scale(0.98);
 }
 
 .tower-btn.training {
-  background: linear-gradient(90deg, #e74c3c 0%, #c0392b 100%);
-  color: var(--light-text);
+  background: linear-gradient(135deg, rgba(230, 74, 25, 0.2) 0%, rgba(192, 57, 43, 0.15) 100%);
+  border-color: #e74c3c;
+  color: #e74c3c;
+  box-shadow: 0 4px 15px rgba(230, 74, 25, 0.2);
 }
 
-.case-btn:hover,
-.expedition-btn:hover,
-.tower-btn:hover,
-.ability-up:hover,
-.use-item-btn:hover {
-  background: linear-gradient(90deg, var(--secondary-color) 0%, var(--primary-color) 100%);
+.tower-btn.training:hover {
+  background: linear-gradient(135deg, rgba(230, 74, 25, 0.35) 0%, rgba(192, 57, 43, 0.25) 100%);
+  box-shadow: 0 6px 25px rgba(230, 74, 25, 0.4);
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 255, 255, 0.3);
-}
-
-.ability-up {
-  padding: 4px 12px;
-  margin-left: 8px;
-  background: var(--success);
-  color: var(--light-text);
-  font-size: 0.9em;
-}
-
-.use-item-btn {
-  margin-left: 10px;
-  background: var(--success);
-  color: var(--light-text);
-  font-size: 0.9em;
-  padding: 4px 12px;
 }
 
 button:disabled {
