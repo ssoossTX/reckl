@@ -8,11 +8,56 @@
     <link rel="stylesheet" href="css/components.css">
 </head>
 <body>
-    <div id="player-stats" class="player-stats">
-      <span id="stat-diamonds"></span> |
-      <span id="stat-clicks"></span> |
-      <span id="stat-level"></span> |
-      <span id="stat-exp"></span>
+    <div class="header-panel">
+        <div class="header-left">
+            <div class="player-level-badge">
+                <span id="header-level">1</span>
+            </div>
+            <div class="player-info">
+                <div class="player-name"><span id="header-name">Игрок</span></div>
+                <div class="player-exp">
+                    <div class="exp-bar">
+                        <div id="header-exp-bar" class="exp-bar-fill"></div>
+                    </div>
+                    <span id="header-exp-text" class="exp-text">0/20</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="header-center">
+            <div class="stat-item">
+                <span class="stat-icon">💰</span>
+                <div class="stat-info">
+                    <div class="stat-label">Алмазы</div>
+                    <span id="header-diamonds" class="stat-value">0</span>
+                </div>
+            </div>
+            <div class="stat-item">
+                <span class="stat-icon">🖱️</span>
+                <div class="stat-info">
+                    <div class="stat-label">Кликов</div>
+                    <span id="header-clicks" class="stat-value">0</span>
+                </div>
+            </div>
+            <div class="stat-item">
+                <span class="stat-icon">⚔️</span>
+                <div class="stat-info">
+                    <div class="stat-label">Сила</div>
+                    <span id="header-power" class="stat-value">1</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="header-right">
+            <div class="prestige-info">
+                <span class="prestige-label">Престиж x</span>
+                <span id="header-prestige-mult" class="prestige-value">1.00</span>
+            </div>
+            <div class="game-time">
+                <span class="time-icon">⏱️</span>
+                <span id="header-time" class="time-value">0:00</span>
+            </div>
+        </div>
     </div>
     <div class="background"></div>
     <nav class="sidebar" id="sidebar">

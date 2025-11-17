@@ -71,6 +71,21 @@ export class UIManager {
     this.elements.statisticsContainer = document.querySelector('.statistics-container');
     this.elements.skillsContainer = document.querySelector('.skills-container');
     this.elements.gameModesContainer = document.querySelector('.game-modes-container');
+
+    // === Новая панель хедера ===
+    this.elements.headerLevel = document.getElementById('header-level');
+    this.elements.headerName = document.getElementById('header-name');
+    this.elements.headerExpBar = document.getElementById('header-exp-bar');
+    this.elements.headerExpText = document.getElementById('header-exp-text');
+    this.elements.headerDiamonds = document.getElementById('header-diamonds');
+    this.elements.headerClicks = document.getElementById('header-clicks');
+    this.elements.headerPower = document.getElementById('header-power');
+    this.elements.headerPrestigeMult = document.getElementById('header-prestige-mult');
+    this.elements.headerTime = document.getElementById('header-time');
+
+    // Запуск таймера игры
+    this.gameStartTime = Date.now();
+    this.updateGameTime();
   }
 
   initEventListeners() {
@@ -142,11 +157,31 @@ export class UIManager {
 
     this.elements.prestigeMultiplier.textContent = this.player.prestigeMultiplier.toFixed(2) + 'x';
 
-    // === Статистика в хедере ===
-    this.elements.statDiamonds.textContent = `💎 Алмазы: ${this.player.diamonds}`;
-    this.elements.statClicks.textContent = `🖱️ Клики: ${this.player.clicks}`;
-    this.elements.statLevel.textContent = `🏅 Уровень: ${this.player.level}`;
-    this.elements.statExp.textContent = `📚 Опыт: ${this.player.exp} / ${this.player.expToNext}`;
+    // === Новая панель хедера ===
+    if (this.elements.headerLevel) {
+      this.elements.headerLevel.textContent = this.player.level;
+      this.elements.headerName.textContent = 'Игрок';
+      this.elements.headerExpBar.style.width = (this.player.exp / this.player.expToNext * 100) + '%';
+      this.elements.headerExpText.textContent = `${this.player.exp}/${this.player.expToNext}`;
+      this.elements.headerDiamonds.textContent = this.player.diamonds;
+      this.elements.headerClicks.textContent = this.player.clicks.toLocaleString();
+      this.elements.headerPower.textContent = Math.round(this.player.clickPower);
+      this.elements.headerPrestigeMult.textContent = this.player.prestigeMultiplier.toFixed(2);
+    }
+
+    // === Статистика в хедере (старая, для совместимости) ===
+    if (this.elements.statDiamonds) {
+      this.elements.statDiamonds.textContent = `💎 Алмазы: ${this.player.diamonds}`;
+    }
+    if (this.elements.statClicks) {
+      this.elements.statClicks.textContent = `🖱️ Клики: ${this.player.clicks}`;
+    }
+    if (this.elements.statLevel) {
+      this.elements.statLevel.textContent = `🏅 Уровень: ${this.player.level}`;
+    }
+    if (this.elements.statExp) {
+      this.elements.statExp.textContent = `📚 Опыт: ${this.player.exp} / ${this.player.expToNext}`;
+    }
 
     // === Способности с бонусами ===
     this.updateAbilityList();
@@ -160,6 +195,30 @@ export class UIManager {
 
     // === Инвентарь ===
     this.updateInventory();
+  }
+
+  /**
+   * Обновить время игры в хедере
+   */
+  updateGameTime() {
+    const elapsed = Math.floor((Date.now() - this.gameStartTime) / 1000);
+    const hours = Math.floor(elapsed / 3600);
+    const minutes = Math.floor((elapsed % 3600) / 60);
+    const seconds = elapsed % 60;
+
+    let timeStr = '';
+    if (hours > 0) {
+      timeStr = `${hours}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+    } else {
+      timeStr = `${minutes}:${String(seconds).padStart(2, '0')}`;
+    }
+
+    if (this.elements.headerTime) {
+      this.elements.headerTime.textContent = timeStr;
+    }
+
+    // Обновляем каждую секунду
+    setTimeout(() => this.updateGameTime(), 1000);
   }
 
   updateAbilityList() {
