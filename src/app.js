@@ -49,6 +49,7 @@ class GameApp {
     this.ui.initEventListeners();
     this.initGameLoopInterval();
     this.initCustomEvents();
+    this.adjustHamburgerPosition();
 
     // === Первичное обновление UI ===
     this.ui.updateProfile();
@@ -425,6 +426,28 @@ class GameApp {
     this.ui.updateProfile();
     this.renderTowerButtons();
     this.saveProgress();
+  }
+
+  // === Динамический расчёт позиции гамбургер-кнопки ===
+  adjustHamburgerPosition() {
+    const hamburger = document.getElementById('openSidebar');
+    const headerPanel = document.querySelector('.header-panel');
+    
+    if (!hamburger || !headerPanel) return;
+
+    const updatePosition = () => {
+      const headerHeight = headerPanel.offsetHeight;
+      const hamburgerSize = window.innerWidth <= 600 ? 44 : 48;
+      const gap = 10; // зазор между header и гамбургером
+      
+      hamburger.style.top = (headerHeight + gap) + 'px';
+    };
+
+    // Обновить при загрузке
+    updatePosition();
+    
+    // Переобновить при изменении размера окна
+    window.addEventListener('resize', updatePosition);
   }
 }
 
