@@ -885,6 +885,301 @@ button:disabled {
 }
 
 /* ===================================================
+   СТИЛИ НОВЫХ ТАБОВ
+   =================================================== */
+
+/* ===== ВКЛАДКА КВЕСТЫ ===== */
+.quest-card {
+  background: linear-gradient(135deg, rgba(0, 100, 150, 0.3) 0%, rgba(50, 80, 120, 0.2) 100%);
+  border: 2px solid rgba(0, 200, 255, 0.2);
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 14px;
+  transition: all 0.3s ease;
+}
+
+.quest-card:hover {
+  border-color: rgba(0, 200, 255, 0.5);
+  box-shadow: 0 4px 15px rgba(0, 200, 255, 0.2);
+  transform: translateX(4px);
+}
+
+.quest-title {
+  color: #0ff;
+  font-weight: 700;
+  font-size: 1.05em;
+  margin: 0 0 8px 0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.quest-description {
+  color: #b8d4ff;
+  font-size: 0.95em;
+  margin: 6px 0;
+  line-height: 1.5;
+}
+
+.quest-progress {
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(0, 255, 255, 0.2);
+  border-radius: 8px;
+  height: 12px;
+  overflow: hidden;
+  margin: 10px 0;
+}
+
+.quest-progress-bar {
+  background: linear-gradient(90deg, #0f0 0%, #0ff 100%);
+  height: 100%;
+  transition: width 0.3s ease;
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.4);
+}
+
+.quest-reward {
+  color: #ffd700;
+  font-weight: 600;
+  font-size: 0.95em;
+  margin-top: 8px;
+}
+
+.quest-status {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 6px;
+  font-size: 0.85em;
+  font-weight: 600;
+  margin-top: 8px;
+}
+
+.quest-status.active {
+  background: rgba(0, 255, 0, 0.2);
+  border: 1px solid #0f0;
+  color: #0f0;
+}
+
+.quest-status.completed {
+  background: rgba(255, 215, 0, 0.2);
+  border: 1px solid #ffd700;
+  color: #ffd700;
+}
+
+/* ===== ВКЛАДКА СТАТИСТИКА ===== */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.stat-box {
+  background: linear-gradient(135deg, rgba(0, 150, 100, 0.3) 0%, rgba(50, 100, 120, 0.2) 100%);
+  border: 2px solid rgba(0, 255, 150, 0.2);
+  border-radius: 12px;
+  padding: 14px;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.stat-box:hover {
+  border-color: rgba(0, 255, 150, 0.5);
+  box-shadow: 0 4px 15px rgba(0, 255, 150, 0.2);
+  transform: translateY(-2px);
+}
+
+.stat-label {
+  color: #0f0;
+  font-size: 0.9em;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+}
+
+.stat-value {
+  color: #fff;
+  font-size: 1.3em;
+  font-weight: 700;
+}
+
+.prestige-history {
+  background: linear-gradient(135deg, rgba(0, 0, 50, 0.3) 0%, rgba(30, 20, 60, 0.2) 100%);
+  border: 2px solid rgba(180, 0, 255, 0.2);
+  border-radius: 12px;
+  padding: 16px;
+  margin-top: 16px;
+}
+
+.prestige-history h3 {
+  color: #b400ff;
+  margin-top: 0;
+  font-size: 1em;
+}
+
+.prestige-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.prestige-table th,
+.prestige-table td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid rgba(180, 0, 255, 0.1);
+  color: #b8d4ff;
+  font-size: 0.9em;
+}
+
+.prestige-table th {
+  color: #b400ff;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.prestige-table tr:hover {
+  background: rgba(180, 0, 255, 0.05);
+}
+
+/* ===== ВКЛАДКА НАВЫКИ ===== */
+.skill-tree {
+  background: linear-gradient(135deg, rgba(100, 0, 150, 0.2) 0%, rgba(50, 30, 100, 0.15) 100%);
+  border: 2px solid rgba(180, 0, 255, 0.2);
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+.skill-tree-title {
+  color: #b400ff;
+  font-weight: 700;
+  font-size: 1.05em;
+  margin: 0 0 14px 0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.skill-nodes {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+  gap: 10px;
+}
+
+.skill-node {
+  background: linear-gradient(135deg, rgba(100, 100, 255, 0.2) 0%, rgba(80, 80, 150, 0.15) 100%);
+  border: 2px solid rgba(100, 100, 255, 0.3);
+  border-radius: 10px;
+  padding: 12px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-height: 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.skill-node:hover {
+  border-color: rgba(100, 150, 255, 0.6);
+  box-shadow: 0 4px 15px rgba(100, 150, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+.skill-node.locked {
+  opacity: 0.5;
+  border-color: rgba(100, 100, 100, 0.3);
+  background: linear-gradient(135deg, rgba(50, 50, 50, 0.2) 0%, rgba(30, 30, 30, 0.15) 100%);
+  cursor: not-allowed;
+}
+
+.skill-node.locked:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+.skill-name {
+  color: #64f;
+  font-weight: 700;
+  font-size: 0.9em;
+  margin-bottom: 4px;
+}
+
+.skill-level {
+  color: #0ff;
+  font-size: 0.85em;
+}
+
+/* ===== ВКЛАДКА ИГРОВЫЕ РЕЖИМЫ ===== */
+.game-mode-card {
+  background: linear-gradient(135deg, rgba(255, 100, 0, 0.15) 0%, rgba(200, 50, 0, 0.1) 100%);
+  border: 2px solid rgba(255, 165, 0, 0.2);
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 14px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.game-mode-card:hover {
+  border-color: rgba(255, 165, 0, 0.5);
+  box-shadow: 0 4px 15px rgba(255, 165, 0, 0.2);
+  transform: translateX(4px);
+}
+
+.game-mode-name {
+  color: #ffa500;
+  font-weight: 700;
+  font-size: 1.05em;
+  margin: 0 0 8px 0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.game-mode-description {
+  color: #b8d4ff;
+  font-size: 0.95em;
+  margin: 6px 0;
+  line-height: 1.5;
+}
+
+.game-mode-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-top: 10px;
+  font-size: 0.9em;
+}
+
+.game-mode-stat {
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 165, 0, 0.2);
+  border-radius: 6px;
+  padding: 8px;
+  color: #ffa500;
+  text-align: center;
+}
+
+.game-mode-button {
+  width: 100%;
+  margin-top: 12px;
+  padding: 10px;
+  background: linear-gradient(135deg, rgba(255, 165, 0, 0.2) 0%, rgba(255, 100, 0, 0.15) 100%);
+  border: 2px solid #ffa500;
+  color: #ffa500;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.game-mode-button:hover {
+  background: linear-gradient(135deg, rgba(255, 165, 0, 0.35) 0%, rgba(255, 100, 0, 0.25) 100%);
+  box-shadow: 0 4px 15px rgba(255, 165, 0, 0.3);
+  transform: translateY(-2px);
+}
+
+/* ===================================================
    АДАПТИВНЫЙ ДИЗАЙН
    =================================================== */
 
@@ -936,6 +1231,35 @@ button:disabled {
     font-size: 0.95em;
   }
 
+  .quest-card,
+  .game-mode-card {
+    padding: 12px;
+    margin-bottom: 10px;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .skill-nodes {
+    grid-template-columns: repeat(auto-fit, minmax(75px, 1fr));
+    gap: 8px;
+  }
+
+  .game-mode-stats {
+    gap: 6px;
+  }
+
+  .prestige-table {
+    font-size: 0.85em;
+  }
+
+  .prestige-table th,
+  .prestige-table td {
+    padding: 6px 4px;
+  }
+
   .drop-info-content {
     min-width: unset !important;
     max-width: 98vw !important;
@@ -952,6 +1276,134 @@ button:disabled {
 
   .drop-info-content table {
     font-size: 0.9em !important;
+  }
+}
+
+/* ===================================================
+   МОДАЛЬНЫЕ ОКНА И ПОПАПЫ
+   =================================================== */
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  backdrop-filter: blur(3px);
+  animation: fadeIn 0.3s ease;
+}
+
+.modal-content {
+  background: linear-gradient(135deg, rgba(0, 20, 40, 0.95) 0%, rgba(10, 40, 50, 0.9) 100%);
+  border: 2px solid rgba(0, 255, 255, 0.3);
+  border-radius: 16px;
+  padding: 32px;
+  max-width: 90vw;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 0 40px rgba(0, 255, 255, 0.2), 0 0 80px rgba(0, 0, 0, 0.5);
+  animation: slideUp 0.3s ease;
+}
+
+.modal-content h2,
+.modal-content h3 {
+  color: #0ff;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: 0;
+  text-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+}
+
+.modal-close-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: linear-gradient(135deg, rgba(255, 100, 100, 0.2) 0%, rgba(200, 50, 50, 0.15) 100%);
+  border: 2px solid rgba(255, 100, 100, 0.4);
+  color: #ff6464;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 1.2em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.modal-close-btn:hover {
+  background: linear-gradient(135deg, rgba(255, 100, 100, 0.35) 0%, rgba(200, 50, 50, 0.25) 100%);
+  border-color: rgba(255, 100, 100, 0.6);
+  box-shadow: 0 0 15px rgba(255, 100, 100, 0.3);
+  transform: scale(1.1);
+}
+
+.modal-buttons {
+  display: flex;
+  gap: 12px;
+  margin-top: 24px;
+  justify-content: flex-end;
+}
+
+.modal-btn {
+  padding: 12px 28px;
+  border: 2px solid;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+  font-size: 0.95em;
+}
+
+.modal-btn.confirm {
+  background: linear-gradient(135deg, rgba(0, 255, 0, 0.2) 0%, rgba(0, 200, 100, 0.15) 100%);
+  border-color: #0f0;
+  color: #0f0;
+}
+
+.modal-btn.confirm:hover {
+  background: linear-gradient(135deg, rgba(0, 255, 0, 0.35) 0%, rgba(0, 200, 100, 0.25) 100%);
+  box-shadow: 0 4px 15px rgba(0, 255, 0, 0.3);
+  transform: translateY(-2px);
+}
+
+.modal-btn.cancel {
+  background: linear-gradient(135deg, rgba(255, 100, 100, 0.2) 0%, rgba(200, 50, 50, 0.15) 100%);
+  border-color: #ff6464;
+  color: #ff6464;
+}
+
+.modal-btn.cancel:hover {
+  background: linear-gradient(135deg, rgba(255, 100, 100, 0.35) 0%, rgba(200, 50, 50, 0.25) 100%);
+  box-shadow: 0 4px 15px rgba(255, 100, 100, 0.3);
+  transform: translateY(-2px);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
   }
 }
 
